@@ -1,0 +1,4 @@
+node_modules/
+assembly/*.wasm
+assembly/*.map
+assembly/*.wat
