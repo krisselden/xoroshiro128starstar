@@ -19,7 +19,8 @@ export function initState(seed: f64): void {
 
 // Random between 0 and 9007199254740991 inclusive.
 // 9007199254740991 == Number.MAX_SAFE_INTEGER
-export function nextUint53(): f64 {
+@inline
+function nextUint53(): f64 {
   return <f64>(nextUint64() >> 11);
 }
 
@@ -40,6 +41,7 @@ export function next(): f64 {
 // Random u64 using xoroshiro128starstar
 // 2018 by David Blackman and Sebastiano Vigna (public domain)
 // http://xoshiro.di.unimi.it/xoroshiro128starstar.c
+@inline
 function nextUint64(): u64 {
   let result: u64 = rotl<u64>(s0 * 5, 7) * 9;
 

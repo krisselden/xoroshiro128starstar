@@ -1,6 +1,6 @@
 {
   "name": "xoroshiro128starstar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "WebAssembly port of xoroshiro128starstar.c PRNG",
   "keywords": [
     "PRNG",
@@ -18,7 +18,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "prepare": "asc --baseDir assembly -Oz -b index.wasm -t index.wat index.ts --sourceMap"
+    "prepare": "asc --baseDir assembly -Oz -b index.wasm -t index.wat index.ts --sourceMap --noDebug"
   },
   "devDependencies": {
     "@types/node": "^10.7.1",

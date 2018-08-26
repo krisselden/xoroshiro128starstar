@@ -4,7 +4,7 @@ A WebAssembly port of [xoroshiro128starstar.c](http://xoshiro.di.unimi.it/xorosh
 using [AssemblyScript](http://assemblyscript.org/).
 
 Uses 2 u64 globals for the state so the WebAssembly module does not allocate any
-pages of memory and is only 384 bytes.
+pages of memory and is only 262 bytes.
 
 ## Install
 
