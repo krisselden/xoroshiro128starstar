@@ -23,6 +23,8 @@
   "devDependencies": {
     "@types/node": "^10.7.1",
     "assemblyscript": "AssemblyScript/assemblyscript",
+    "do-you-even-bench": "^1.0.5",
+    "seedrandom": "^2.4.4",
     "typescript": "^3.0.1"
   }
 }
