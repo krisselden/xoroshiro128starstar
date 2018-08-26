@@ -19,9 +19,9 @@
  * 2015 by Sebastiano Vigna (public domain)
  * http://xoshiro.di.unimi.it/splitmix64.c
  *
- * @param {number} seed a number to seed the splitmix64 PRNG
- *                 used to initialize the 128 bit state.
+ * @param {number=} seed a number to seed the splitmix64 PRNG
+ *                       used to initialize the 128 bit state.
  */
-declare function xoroshiro128starstar(seed: number): () => number;
+declare function xoroshiro128starstar(seed?: number): () => number;
 
 export = xoroshiro128starstar;

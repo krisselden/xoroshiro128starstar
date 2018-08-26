@@ -1,9 +1,8 @@
 "use strict";
-const readFileSync = require("fs").readFileSync;
-const now =
-  typeof performance !== "undefined" && typeof performance.now === "function"
-    ? performance.now
-    : Date.now;
+const wasmModule = new WebAssembly.Module(
+  require("fs").readFileSync(__dirname + "/assembly/index.wasm")
+);
+const { random: defaultSeed } = Math;
 
 /**
  * Returns a random function that returns a number >= 0 and < 1
@@ -30,12 +29,10 @@ const now =
  *                 used to initialize the 128 bit state.
  */
 module.exports = function xoroshiro128starstar(seed) {
-  const mod = new WebAssembly.Instance(
-    new WebAssembly.Module(readFileSync(__dirname + "/assembly/index.wasm"))
-  );
-  const { initState, next } = mod.exports;
+  const instance = new WebAssembly.Instance(wasmModule);
+  const { initState, next } = instance.exports;
   if (typeof seed !== "number" || seed === 0) {
-    seed = now();
+    seed = defaultSeed();
   }
   initState(seed);
   return next;
