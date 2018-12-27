@@ -24,10 +24,6 @@ export function initState(seed: f64): void {
 // use `Math.round(next() * 10)` as it will split the probability between
 // 0 and 10.
 export function next(): f64 {
-  // MAX_SAFE_INTEGER == 9007199254740991
-  // 9007199254740992 would be 1.0
-  // 9007199254740991 / 9007199254740992 == 0.9999999999999999
-  // 2^-53 == 1 / 9007199254740992 == 1.1102230246251565e-16
   return reinterpret<f64>(<u64>0x3FF << 52 | nextUint64() >> 12) - 1.0;
 }
 
