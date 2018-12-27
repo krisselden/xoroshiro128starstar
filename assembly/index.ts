@@ -43,11 +43,17 @@ export function next(): f64 {
 // http://xoshiro.di.unimi.it/xoroshiro128starstar.c
 @inline
 function nextUint64(): u64 {
-  let result: u64 = rotl<u64>(s0 * 5, 7) * 9;
+  let _s0 = s0;
+  let _s1 = s1;
 
-  s1 ^= s0;
-  s0 = rotl<u64>(s0, 24) ^ s1 ^ (s1 << 16); // a, b
-  s1 = rotl<u64>(s1, 37); // c
+  let result = rotl<u64>(_s0 * 5, 7) * 9;
+
+  _s1 ^= _s0;
+  _s0 = rotl<u64>(_s0, 24) ^ _s1 ^ (_s1 << 16); // a, b
+  _s1 = rotl<u64>(_s1, 37); // c
+
+  s0 = _s0;
+  s1 = _s1;
 
   return result;
 }

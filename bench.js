@@ -1,7 +1,7 @@
 /* globals: mathrandom, wasmrandom, seedrandom, freq, gc */
-mathrandom = Math.random;
-wasmrandom = require("./index")(1234567);
-seedrandom = require("seedrandom")("hello.");
+global.mathrandom = Math.random;
+global.wasmrandom = require("./index")(1234567);
+global.seedrandom = require("seedrandom")("hello.");
 
 // ensure we do the same test, and name === function
 function bench(name) {
@@ -9,7 +9,7 @@ function bench(name) {
     name: `${name} (0 <= int < 10)`,
     onStart: () => {
       if (typeof gc === "function") gc();
-      freq = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      global.freq = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     },
     onComplete: () => {
       // check counts uniformly distributed
