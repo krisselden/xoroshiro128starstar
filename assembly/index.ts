@@ -17,13 +17,6 @@ export function initState(seed: f64): void {
   s1 = splitmix64(s0);
 }
 
-// Random between 0 and 9007199254740991 inclusive.
-// 9007199254740991 == Number.MAX_SAFE_INTEGER
-@inline
-function nextUint53(): f64 {
-  return <f64>(nextUint64() >> 11);
-}
-
 // Random between 0 and 0.9999999999999999 inclusive.
 // This matches Math.random() >= 0 and < 1.
 // A uniform random between 0-9 would be `Math.floor(next() * 10)`
@@ -35,7 +28,7 @@ export function next(): f64 {
   // 9007199254740992 would be 1.0
   // 9007199254740991 / 9007199254740992 == 0.9999999999999999
   // 2^-53 == 1 / 9007199254740992 == 1.1102230246251565e-16
-  return nextUint53() * 1.1102230246251565e-16;
+  return reinterpret<f64>(<u64>0x3FF << 52 | nextUint64() >> 12) - 1.0;
 }
 
 // Random u64 using xoroshiro128starstar
@@ -46,11 +39,12 @@ function nextUint64(): u64 {
   let _s0 = s0;
   let _s1 = s1;
 
-  let result = rotl<u64>(_s0 * 5, 7) * 9;
+  let t = rotl((_s0 << 2) + _s0, 7);
+  let result = (t << 3) + t;
 
   _s1 ^= _s0;
-  _s0 = rotl<u64>(_s0, 24) ^ _s1 ^ (_s1 << 16); // a, b
-  _s1 = rotl<u64>(_s1, 37); // c
+  _s0 = rotl(_s0, 24) ^ _s1 ^ (_s1 << 16); // a, b
+  _s1 = rotl(_s1, 37); // c
 
   s0 = _s0;
   s1 = _s1;
