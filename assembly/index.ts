@@ -35,8 +35,7 @@ function nextUint64(): u64 {
   let _s0 = s0;
   let _s1 = s1;
 
-  let t = rotl((_s0 << 2) + _s0, 7);
-  let result = (t << 3) + t;
+  let result = rotl(_s0 * 5, 7) * 9;
 
   _s1 ^= _s0;
   _s0 = rotl(_s0, 24) ^ _s1 ^ (_s1 << 16); // a, b
