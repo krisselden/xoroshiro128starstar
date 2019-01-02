@@ -29,6 +29,7 @@ const { random: defaultSeed } = Math;
  *                 used to initialize the 128 bit state.
  */
 module.exports = function xoroshiro128starstar(seed) {
+  "use strict";
   const instance = new WebAssembly.Instance(wasmModule);
   const { initState, next } = instance.exports;
   if (typeof seed !== "number" || seed === 0) {

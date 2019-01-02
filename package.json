@@ -18,11 +18,11 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "prepare": "asc --baseDir assembly -Oz -b index.wasm -t index.wat index.ts --sourceMap --noDebug"
+    "prepare": "asc --baseDir assembly -O3 -b index.wasm -t index.wat index.ts --validate --sourceMap"
   },
   "devDependencies": {
     "@types/node": "^10.7.1",
-    "assemblyscript": "AssemblyScript/assemblyscript",
+    "assemblyscript": "github:AssemblyScript/assemblyscript",
     "do-you-even-bench": "^1.0.5",
     "seedrandom": "^2.4.4",
     "typescript": "^3.0.1"
